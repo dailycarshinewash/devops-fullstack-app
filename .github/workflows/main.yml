@@ -7,7 +7,7 @@ on:
     branches: ["main", "development"]
 
 jobs:
-  UdyogWale:
+  devops-fullstack-app:
     runs-on: ubuntu-latest
 
     steps:
