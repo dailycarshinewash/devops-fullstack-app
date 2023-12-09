@@ -14,16 +14,19 @@ jobs:
       - uses: AutoModality/action-clean@v1
       - uses: actions/checkout@v3
 
-      - name: Use Node.js 14.17.0
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14.17.0
+      # - name: Use Node.js 14.17.0
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 14.17.0
 
       - name: Build
         run: |
           #!/bin/bash
           set -e
           ls -la
+          echo $GITHUB_RUN_ID
+          cd frontend
+          docker build -t devops-fullstack-app:
           echo "Installing Dependancies"
           docker version
           # npm install
