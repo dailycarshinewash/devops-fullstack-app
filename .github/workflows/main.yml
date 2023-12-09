@@ -1,1 +1,93 @@
-test
+name: Build & Deploy
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main", "development"]
+
+jobs:
+  UdyogWale:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: AutoModality/action-clean@v1
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js 14.17.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.17.0
+
+      - name: Build
+        run: |
+          #!/bin/bash
+          set -e
+          echo "Installing Dependancies"
+          # npm install
+          # echo "Building Application"
+          # npm run build-prod
+
+      # - name: Deploy
+      #   uses: jakejarvis/s3-sync-action@master
+      #   with:
+      #     args: --acl public-read --delete --exclude '.git/*' --exclude 'assets/*' --exclude 'error/*' --exclude 'ads.txt'
+      #   env:
+      #     AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     AWS_REGION: ${{ secrets.AWS_REGION }}
+      #     SOURCE_DIR: "dist"
+
+      # - name: AWS cli config
+      #   id: install-aws-cli
+      #   uses: unfor19/install-aws-cli-action@master
+      #   with:
+      #     version: 2
+      # - run: |
+      #     #!/bin/bash
+      #     set -ex
+      #     echo "Copy File"
+      #     aws s3 sync s3://aws-owner-udyogwale s3://udyogwale-client-ui --delete --sse AES256
+      #     echo "Clear Cache"
+      #     aws cloudfront create-invalidation --distribution-id EVXGR2J1OA38L --paths "/*"
+      #   shell: bash
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     AWS_REGION: ${{ secrets.AWS_REGION }}
+
+      # # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+      # - name: Setup Terraform
+      #   uses: hashicorp/setup-terraform@v2
+        
+
+      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.      
+      # - name: Terraform Init
+      #   run: |
+      #     #!/bin/bash
+      #     set -ex
+      #     cd terraform
+      #     terraform init -backend-config='bucket=udyogwale-terraform-statefiles'
+
+      #    # Checks that all Terraform configuration files adhere to a canonical format
+      # - name: Terraform Format
+      #   run: |
+      #     #!/bin/bash
+      #     set -ex
+      #     cd terraform
+      #     terraform fmt -check
+
+      # # Generates an execution plan for Terraform
+      # - name: Terraform Plan
+      #   run: |
+      #     #!/bin/bash
+      #     set -ex
+      #     cd terraform
+      #     terraform plan -input=false -backend-config='bucket=udyogwale-terraform-statefiles'
+
+        # On push to "main", build or change infrastructure according to Terraform configuration files
+        # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+      # - name: Terraform Apply
+      #   if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+      #   run: terraform apply -auto-approve -input=false
