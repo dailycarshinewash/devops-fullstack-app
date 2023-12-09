@@ -2,7 +2,7 @@ name: Build & Deploy
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "development"]
   pull_request:
     branches: ["main", "development"]
 
@@ -13,11 +13,6 @@ jobs:
     steps:
       - uses: AutoModality/action-clean@v1
       - uses: actions/checkout@v3
-
-      # - name: Use Node.js 14.17.0
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 14.17.0
 
       - name: Build
         run: |
