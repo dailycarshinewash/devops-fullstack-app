@@ -26,13 +26,8 @@ jobs:
           ls -la
           echo $GITHUB_RUN_ID
           cd frontend
-          docker build -t devops-fullstack-app:
-          echo "Installing Dependancies"
-          docker version
-          # npm install
-          # echo "Building Application"
-          # npm run build-prod
-
+          docker build -t devops-fullstack-app:$GITHUB_RUN_ID
+          
       # - name: Deploy
       #   uses: jakejarvis/s3-sync-action@master
       #   with:
