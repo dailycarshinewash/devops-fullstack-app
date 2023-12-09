@@ -24,6 +24,7 @@ jobs:
           #!/bin/bash
           set -e
           echo "Installing Dependancies"
+          docker version
           # npm install
           # echo "Building Application"
           # npm run build-prod
